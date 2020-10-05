@@ -22,8 +22,9 @@ for (x, y, w, h) in res:
 # pt1 ==> (x,y)   pt2 ==> (x+w,y)   pt3 ==> (x,y+h)   pt4 ==> (x+w,y+h)
 
 # Lets make a threshold for the y-axis:
-threshold = 40
-threshold_y = 40
+threshold = 60
+threshold_up = 50
+threshold_down = 65
 
 while cap.isOpened():
     _, frame = cap.read()
@@ -41,13 +42,13 @@ while cap.isOpened():
              thickness=1)
     cv2.rectangle(frame, (x_current, y_current), (x_current + w_current, y_current + h_current), (0, 255, 0),
                   thickness=1)
-    if (y_current - y_init > threshold_y) and (ARROW_DOWN == False):
+    if (y_current - y_init > threshold_down) and (ARROW_DOWN == False):
         PressKey(DOWN)
         ReleaseKey(DOWN)
         ARROW_DOWN = True
         print("DOWN")
 
-    if (y_init - y_current > threshold_y) and (ARROW_UP == False):
+    if (y_init - y_current > threshold_up) and (ARROW_UP == False):
         PressKey(UP)
         ReleaseKey(UP)
         ARROW_UP = True
